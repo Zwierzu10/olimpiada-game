@@ -64,7 +64,7 @@ const MainMenu = () => {
       </div>
 
       <div className="w-1/2 flex flex-col justify-center items-center gap-10">
-        <button className="relative flex items-center justify-center w-1/2 h-1/5 text-[clamp(12px,2vw,50px)] font-medium tracking-[0.05em] 
+        <button className="relative flex items-center justify-center w-1/2 h-1/10 text-[clamp(12px,2vw,50px)] font-medium tracking-[0.05em] 
                             bg-[#70d6f0] text-white rounded-[0.9em] border-none
                             shadow-[inset_0_0_1.6em_-0.6em_#714da6] overflow-hidden
                             cursor-pointer transition-all duration-300
@@ -82,7 +82,7 @@ const MainMenu = () => {
             </span>
         </button>
 
-        <button className="relative flex items-center justify-center w-1/2 h-1/5 text-[clamp(12px,2vw,50px)] font-medium tracking-[0.05em] 
+        <button className="relative flex items-center justify-center w-1/2 h-1/10 text-[clamp(12px,2vw,50px)] font-medium tracking-[0.05em] 
                             bg-[#8B4513] text-white rounded-[0.9em] border-none
                             shadow-[inset_0_0_1.6em_-0.6em_#5C3317] overflow-hidden
                             cursor-pointer transition-all duration-300
