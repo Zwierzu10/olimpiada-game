@@ -1,7 +1,15 @@
 
+import { useRouter } from "next/navigation";
 
-const MainMenu = () => {
-  const stars = Array.from({ length: 50 });
+export default function MainMenu() {
+  const stars = Array.from({ length: 67 });
+  const router = useRouter();
+
+  const handlePlayClick = () => {
+    router.push("/game");
+  }
+
+
 
 
   return (
@@ -26,7 +34,7 @@ const MainMenu = () => {
       })}
 
       <div className="w-full flex flex-col justify-center items-center gap-10">
-        <button className="relative flex items-center justify-center w-1/5 h-1/10 text-[clamp(12px,2vw,50px)] font-medium tracking-[0.05em] 
+        <button onClick={handlePlayClick} className="relative flex items-center justify-center w-1/5 h-1/10 text-[clamp(12px,2vw,50px)] font-medium tracking-[0.05em] 
                             bg-[#000f42] text-white rounded-[0.9em] border-none
                             shadow-[inset_0_0_1.6em_-0.6em_#000f42] overflow-hidden
                             cursor-pointer transition-all duration-300
@@ -67,4 +75,4 @@ const MainMenu = () => {
   );
 };
 
-export default MainMenu;
+

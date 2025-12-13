@@ -7,7 +7,7 @@ import { useAuth } from "../hooks/useAuth";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useState } from "react";
 
-const Logout = () => {
+export default function Logout() {
   const router = useRouter();
   const { user } = useAuth();
   const [isHovered, setIsHovered] = useState(false);
@@ -19,7 +19,7 @@ const Logout = () => {
       await signOut(auth);
       router.push("/login");
     } catch (err: any) {
-      alert("Błąd podczas wylogowania: " + err.message);
+      alert("Blad podczas wylogowania: " + err.message);
     }
   };
 
@@ -48,4 +48,3 @@ const Logout = () => {
   );
 };
 
-export default Logout;
