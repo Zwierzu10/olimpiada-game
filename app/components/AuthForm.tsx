@@ -42,7 +42,7 @@ export default function AuthForm() {
   };
 
   return (
-    <div className="w-full h-screen bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 text-white flex justify-center items-center">
+    <div className="w-full h-screen bg-[#1D1E22] text-white flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
         className="
