@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Swords from "./Swords";
 import InputAi from "./InputAi";
-import Writing from "./Writing";
+import Options from "./Options";
 
 
 export default function Choice() {
@@ -10,6 +10,10 @@ export default function Choice() {
   const [etap, setEtap] = useState(1);
   const [userPrzedmiot, setUserPrzedmiot] = useState("");
   const [userTemat, setUserTemat] = useState("");
+  const [userIloscPytan, setUserIloscPytan] = useState(1);
+  const [userTrudnosc, setUserTrudnosc] = useState("Łatwy");
+
+
     const nextEtap = () => {
     setEtap(prev => prev + 1);
   };
@@ -27,7 +31,7 @@ export default function Choice() {
     );
     case 3:
       return(
-      <Writing/>
+      <Options userIloscPytan={userIloscPytan} setUserIloscPytan={setUserIloscPytan} userTrudnosc={userTrudnosc} setUserTrudnosc={setUserTrudnosc} onNext={nextEtap} />
       );
 
   }
