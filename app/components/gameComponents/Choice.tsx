@@ -2,6 +2,7 @@ import { useState } from "react";
 import Swords from "./Swords";
 import InputAi from "./InputAi";
 import Options from "./Options";
+import Writing from "./Writing";
 
 
 export default function Choice() {
@@ -32,6 +33,11 @@ export default function Choice() {
     case 3:
       return(
       <Options userIloscPytan={userIloscPytan} setUserIloscPytan={setUserIloscPytan} userTrudnosc={userTrudnosc} setUserTrudnosc={setUserTrudnosc} onNext={nextEtap} />
+      );
+
+    case 4:
+      return(
+        <Writing/>
       );
 
   }
