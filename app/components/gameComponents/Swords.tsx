@@ -44,9 +44,10 @@ export default function Swords({ onNext, userPrzedmiot, setUserPrzedmiot }: Swor
         <div className="animated-border-box absolute inset-0 rounded-xl"></div>
 
         <div className="relative z-10 w-full h-full flex flex-col text-white p-6">
-          <h1 className="w-full h-1/4 text-4xl flex items-center justify-center">
+          <h1 className="w-full h-[15%] text-4xl flex items-center justify-center">
             Jaki typ miecza chcesz wykuć?
           </h1>
+          <h2 className="w-full h-[15%] text-xl text-gray-300 flex items-start justify-center">Jakiego przedmiotu chcesz się pouczyć?</h2>
 
           <div className="w-full h-3/4 flex justify-around items-center">
             <div onClick={() => { setUserPrzedmiot("Informatyka"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
