@@ -23,7 +23,8 @@ function EarthRune() {
 
 
 
-export default function Writing({ userIloscPytan, setUserIloscPytan, userTrudnosc, setUserTrudnosc, onNext }: { onNext: () => void, userIloscPytan: number; setUserIloscPytan: (ilosc: number) => void; userTrudnosc: string; setUserTrudnosc: (trudnosc: string) => void; }) {
+export default function Options({ userIloscPytan, setUserIloscPytan, userTrudnosc, setUserTrudnosc, onNext }:
+   { onNext: (a: string) => Promise<void>, userIloscPytan: number; setUserIloscPytan: (ilosc: number) => void; userTrudnosc: string; setUserTrudnosc: (trudnosc: string) => void; }) {
 
 
 
@@ -116,7 +117,7 @@ export default function Writing({ userIloscPytan, setUserIloscPytan, userTrudnos
           <div className="w-full h-10/25 flex flex-col justify-around items-center">
             <div className="w-full h-1/2 flex justify-center items-center flex-col">
               <h1 className="text-gray-200 text-3xl w-full h-1/4 flex justify-center items-center">Ile
-                {userTrudnosc === "Łatwy" ? " ognistych " : userTrudnosc === "Średni" ? " wodnych " : userTrudnosc === "Trudny" ? " powietrznych " : userTrudnosc === "Bardzo Trudny" ? " ziemnych " : ""}
+                {userTrudnosc === "Łatwy" ? " ognistych " : userTrudnosc === "Średni" ? " wodnych " : userTrudnosc === "Trudny" ? " powietrznych " : userTrudnosc === "Bardzo Trudny" ? " ziemnych " : " "}
                 run chcesz dodać do broni?</h1>
               <h2 className="text-gray-400 text-lg w-full h-1/4 flex justify-center items-center">Na ile pytań chcesz odpowiedzieć?</h2>
             </div>
@@ -134,12 +135,12 @@ export default function Writing({ userIloscPytan, setUserIloscPytan, userTrudnos
               }
             }}
               className="bg-[#2e2f35] w-1/10 h-1/6 p-4  rounded-2xl hover:scale-105 transition-transform duration-300" />
-            <button onClick={()=>{
+            <button onClick={async()=>{
               if(selectedRune === ""){
                 errorSetNormal("Wybierz runę przed potwierdzeniem!");
                 return;
               }
-              onNext();
+              await onNext('generuj');
             }} className={`w-1/3 rounded-4xl text-white border-2 border-[#2e2f35] cursor-pointer transition-transform duration-300 bg-[#1D1E22] p-4 ${errorText ? "ring-4 ring-red-500  hover:scale-100" : "ring-4 ring-transparent hover:scale-105"}`}>{errorText || "Potwierdź wybór runy"}</button>
           </div>
         </div>

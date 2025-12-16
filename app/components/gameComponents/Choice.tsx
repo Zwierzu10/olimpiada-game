@@ -12,11 +12,44 @@ export default function Choice() {
   const [userPrzedmiot, setUserPrzedmiot] = useState("");
   const [userTemat, setUserTemat] = useState("");
   const [userIloscPytan, setUserIloscPytan] = useState(1);
-  const [userTrudnosc, setUserTrudnosc] = useState("Łatwy");
+  const [userTrudnosc, setUserTrudnosc] = useState("");
+  const [pytanie, setPytanie] = useState("");
+  const [odpowiedzi, setOdpowiedzi] = useState([]);
 
-
-    const nextEtap = () => {
+    const nextEtap = async(a:string) => {
+      if(a === 'generuj'){
+        await generateQuestion();
+      }
     setEtap(prev => prev + 1);
+    
+    };
+
+  const generateQuestion = async () => {
+    try {
+      const response = await fetch('/api/generateQuestions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          przedmiot: userPrzedmiot,
+          temat: userTemat,
+          iloscPytan: userIloscPytan,
+          trudnosc: userTrudnosc,
+        }),
+      });
+      if (!response.ok){
+        throw new Error('Blad API');
+      }
+
+      const data = await response.json();
+      setPytanie(data.question);
+  }catch(error){
+    alert('Wystapil blad podczas generowania pytania. Sprobuj ponownie.');
+  }
+
+
+
   };
 
   switch(etap){
@@ -37,7 +70,7 @@ export default function Choice() {
 
     case 4:
       return(
-        <Writing/>
+        <Writing userIloscPytan={userIloscPytan} pytanie={pytanie} />
       );
 
   }

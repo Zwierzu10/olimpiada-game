@@ -28,7 +28,7 @@ function SaberModel() {
 
 
 type SwordsProps = {
-  onNext: () => void;
+  onNext: (a:string) => void;
   userPrzedmiot: string;
   setUserPrzedmiot: (przedmiot: string) => void;
 };
@@ -49,7 +49,7 @@ export default function Swords({ onNext, userPrzedmiot, setUserPrzedmiot }: Swor
           </h1>
 
           <div className="w-full h-3/4 flex justify-around items-center">
-            <div onClick={() => { setUserPrzedmiot("Informatyka"); onNext(); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+            <div onClick={() => { setUserPrzedmiot("Informatyka"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
                 <Canvas camera={{ position: [0, 100, 0], fov: 10000 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
@@ -63,7 +63,7 @@ export default function Swords({ onNext, userPrzedmiot, setUserPrzedmiot }: Swor
                         <p className="text-gray-400 text-lg font-semibold text-center">Miecz</p>
                     </div>
             </div>
-            <div onClick={() => { setUserPrzedmiot("Historia"); onNext(); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+            <div onClick={() => { setUserPrzedmiot("Historia"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
                 <Canvas camera={{ position: [0, 2, 0], fov: 10000 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
@@ -76,7 +76,7 @@ export default function Swords({ onNext, userPrzedmiot, setUserPrzedmiot }: Swor
                         <p className="text-gray-400 text-lg font-semibold text-center">Katana</p>
                     </div>
             </div>
-            <div onClick={() => { setUserPrzedmiot("Biologia"); onNext(); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+            <div onClick={() => { setUserPrzedmiot("Biologia"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
                 <Canvas camera={{ position: [10, 1, 10], fov: 10000 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
@@ -89,7 +89,7 @@ export default function Swords({ onNext, userPrzedmiot, setUserPrzedmiot }: Swor
                         <p className="text-gray-400 text-lg font-semibold text-center">Sztylet</p>
                     </div>
             </div>
-            <div onClick={() => { setUserPrzedmiot("Chemia"); onNext(); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+            <div onClick={() => { setUserPrzedmiot("Chemia"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
                 <Canvas camera={{ position: [1, 500, 1], fov: 10000 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
@@ -102,7 +102,7 @@ export default function Swords({ onNext, userPrzedmiot, setUserPrzedmiot }: Swor
                         <p className="text-gray-400 text-lg font-semibold text-center">Duży Miecz</p>
                     </div>
             </div>
-            <div onClick={() => { setUserPrzedmiot("Geografia"); onNext(); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+            <div onClick={() => { setUserPrzedmiot("Geografia"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
                 <Canvas camera={{ position: [10, 167, 10], fov: 10000 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />

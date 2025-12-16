@@ -9,7 +9,7 @@ function WaterBucket() {
 }
 
 
-export default function InputAi({userTemat, setUserTemat, onNext}: {userTemat: string, setUserTemat: (temat: string) => void, onNext: () => void}) {
+export default function InputAi({userTemat, setUserTemat, onNext}: {userTemat: string, setUserTemat: (temat: string) => void, onNext: (a:string) => void}) {
 
     return(
         <div className="w-full h-full bg-[#1D1E22] flex justify-center items-center">
@@ -22,7 +22,7 @@ export default function InputAi({userTemat, setUserTemat, onNext}: {userTemat: s
                         <h2 className="text-gray-500 ml-[1%]">Napisz jaki dokładnie temat chcesz się pouczyć (np: HTML)</h2>
                         <textarea value={userTemat} onChange={(e)=> setUserTemat(e.target.value)} className="bg-[#2e2f35] w-full h-[70%]
                           p-4 border-4 border-gray-600 rounded-2xl text-white flex justify-start items-start text-xl hover:scale-101 transition-transform duration-300"/>
-                          <button onClick={onNext} className="w-1/5 rounded-4xl text-white border-2 border-[#2e2f35] cursor-pointer hover:scale-105 transition-transform duration-300 bg-[#1D1E22]">Potwierdź</button>
+                          <button onClick={()=>onNext("67")} className="w-1/5 rounded-4xl text-white border-2 border-[#2e2f35] cursor-pointer hover:scale-105 transition-transform duration-300 bg-[#1D1E22]">Potwierdź</button>
                     </div>                
                     <div className="z-10 text-white w-full h-1/2 p-4">
                         <Canvas camera={{position: [0, 500, 500], fov: 45,}}>
