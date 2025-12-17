@@ -1,7 +1,9 @@
 import { useState } from "react";
-export default function Writing({ userIloscPytan, pytanie }: { userIloscPytan: number, pytanie: string }) {
+export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowiedzi, onNext }: 
+  { userIloscPytan: number, pytanie: string, odpowiedzi: string[], setOdpowiedzi: (odpowiedzi: string[]) => void, onNext: (a: string) => Promise<void> }) {
 
-  const [currentQuestion, setCurrentQuestion] = useState(1);
+  const [terazPytanie, setTerazPytanie] = useState(1);
+  const [localOdpowiedz, setLocalOdpowiedz] = useState("");
 
 
 
@@ -16,13 +18,19 @@ export default function Writing({ userIloscPytan, pytanie }: { userIloscPytan: n
           <div className="w-full h-1/6 flex justify-around items-center flex-row">
           <div className="w-3/10"></div>
             <h1 className="w-9/10 h-full text-3xl text-white bg-[#1d1e2286] p-4 rounded-3xl">{pytanie}</h1>
-            <h1 className="w-3/10 flex justify-end items-start h-full text-white text-2xl p-4">{currentQuestion}/{userIloscPytan}</h1>
+            <h1 className="w-3/10 flex justify-end items-start h-full text-white text-2xl p-4">{terazPytanie}/{userIloscPytan}</h1>
           </div>
           <div className="w-full h-3/6 rounded-3xl p-4 text-white text-xl overflow-y-auto flex justify-center items-center">
-            <textarea className=" w-full h-9/10 bg-[#2e2f35] rounded-3xl p-4"/>
+            <textarea onChange={(e)=>setLocalOdpowiedz(e.target.value)} value={localOdpowiedz} className=" w-full h-9/10 bg-[#2e2f35] rounded-3xl p-4"/>
           </div>
           <div className="w-full h-1/6 flex justify-end items-center">
-            <button className="bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 cursor-pointer">Dalej</button>
+            <button onClick={
+              ()=>{setTerazPytanie(prev => prev + 1), 
+                onNext('generujBez67'),
+                setOdpowiedzi([...odpowiedzi, localOdpowiedz]),
+                setLocalOdpowiedz("");
+              }} 
+              className="bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 cursor-pointer">Dalej</button>
           </div>
         </div>
       </div>

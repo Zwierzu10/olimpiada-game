@@ -122,17 +122,12 @@ export default function Options({ userIloscPytan, setUserIloscPytan, userTrudnos
               <h2 className="text-gray-400 text-lg w-full h-1/4 flex justify-center items-center">Na ile pytań chcesz odpowiedzieć?</h2>
             </div>
             <input type="number" value={userIloscPytan} onChange={(e) => {
-              const value = Number(e.target.value);
-              if (value > 5) {
-                setUserIloscPytan(5);
-              } else {
-                setUserIloscPytan(value);
-              }
-              if (value < 1) {
-                setUserIloscPytan(1);
-              } else {
-                setUserIloscPytan(value);
-              }
+              let value = Number(e.target.value);
+
+              if (value > 5) value = 5;
+              if (value < 1) value = 1;
+
+              setUserIloscPytan(value);
             }}
               className="bg-[#2e2f35] w-1/10 h-1/6 p-4  rounded-2xl hover:scale-105 transition-transform duration-300" />
             <button onClick={async()=>{

@@ -14,17 +14,31 @@ export default function Choice() {
   const [userIloscPytan, setUserIloscPytan] = useState(1);
   const [userTrudnosc, setUserTrudnosc] = useState("");
   const [pytanie, setPytanie] = useState("");
-  const [odpowiedzi, setOdpowiedzi] = useState([]);
+  const [starePytania, setStarePytania] = useState<string[]>([]);
+  const [odpowiedzi, setOdpowiedzi] = useState<string[]>([]);
 
     const nextEtap = async(a:string) => {
       if(a === 'generuj'){
-        await generateQuestion();
+        const nowePytania = [...starePytania, pytanie];
+        setStarePytania(nowePytania);
+        await generateQuestion(nowePytania);
+        setEtap(prev => prev + 1);
+      }else if(a === 'generujBez67'){
+        if(starePytania.length >= userIloscPytan){
+          setEtap(prev => prev + 1);
+          return;
+        }
+        const nowePytania = [...starePytania, pytanie];
+        setStarePytania(nowePytania);
+        await generateQuestion(nowePytania);
+        
+      }else{
+        setEtap(prev => prev + 1);
       }
-    setEtap(prev => prev + 1);
     
     };
 
-  const generateQuestion = async () => {
+  const generateQuestion = async (poprzednie:string[]) => {
     try {
       const response = await fetch('/api/generateQuestions', {
         method: 'POST',
@@ -36,6 +50,7 @@ export default function Choice() {
           temat: userTemat,
           iloscPytan: userIloscPytan,
           trudnosc: userTrudnosc,
+          poprzedniePytania: starePytania,
         }),
       });
       if (!response.ok){
@@ -70,7 +85,7 @@ export default function Choice() {
 
     case 4:
       return(
-        <Writing userIloscPytan={userIloscPytan} pytanie={pytanie} />
+        <Writing userIloscPytan={userIloscPytan} pytanie={pytanie} odpowiedzi={odpowiedzi} setOdpowiedzi={setOdpowiedzi}  onNext={nextEtap} />
       );
 
   }

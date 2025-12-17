@@ -3,7 +3,7 @@ import OpenAI from "openai";
 
 export async function POST(request: Request) {
   try {
-    const { przedmiot, temat, iloscPytan, trudnosc } = await request.json();
+    const { przedmiot, temat, trudnosc, poprzedniePytania } = await request.json();
 
     const client = new OpenAI({
       apiKey: process.env.OPENROUTER_API_KEY,
@@ -11,7 +11,8 @@ export async function POST(request: Request) {
     });
 
     const prompt = `Wygeneruj pytanie dotyczące ${przedmiot} na temat ${temat}. Pytanie powinno być ${trudnosc}.
-     Podaj tylko jedno pytanie. Dostosuj język do tego który jest napisany tutaj ${temat}. Ty nie dajesz mi odpowiedzi tylko pytania. Jedno zwięzłe pytanie.`;
+     Podaj tylko jedno pytanie. Dostosuj język do tego który jest napisany tutaj ${temat}. Ty nie dajesz mi odpowiedzi tylko pytania. Jedno zwięzłe pytanie.
+     Ułóż pytanie inne niz poprzednie: ${poprzedniePytania.join(", ")}.`;
 
     const response = await client.chat.completions.create({
       model: "openai/gpt-4o", 
