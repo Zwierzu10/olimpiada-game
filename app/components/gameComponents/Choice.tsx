@@ -3,12 +3,12 @@ import Swords from "./Swords";
 import InputAi from "./InputAi";
 import Options from "./Options";
 import Writing from "./Writing";
-
+import Review from "./Review";
 
 export default function Choice() {
 
 
-  const [etap, setEtap] = useState(1);
+  const [etap, setEtap] = useState(5);
   const [userPrzedmiot, setUserPrzedmiot] = useState("");
   const [userTemat, setUserTemat] = useState("");
   const [userIloscPytan, setUserIloscPytan] = useState(1);
@@ -87,7 +87,10 @@ export default function Choice() {
       return(
         <Writing userIloscPytan={userIloscPytan} pytanie={pytanie} odpowiedzi={odpowiedzi} setOdpowiedzi={setOdpowiedzi}  onNext={nextEtap} />
       );
-
+    case 5:
+      return(
+        <Review />
+      );
   }
 
  
