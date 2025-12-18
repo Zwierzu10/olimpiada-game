@@ -90,7 +90,7 @@ export default function Choice() {
       );
     case 5:
       return(
-        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} />
+        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} onNext={nextEtap} />
       );
   }
 
