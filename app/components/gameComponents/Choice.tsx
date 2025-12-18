@@ -8,7 +8,7 @@ import Review from "./Review";
 export default function Choice() {
 
 
-  const [etap, setEtap] = useState(5);
+  const [etap, setEtap] = useState(1);
   const [userPrzedmiot, setUserPrzedmiot] = useState("");
   const [userTemat, setUserTemat] = useState("");
   const [userIloscPytan, setUserIloscPytan] = useState(1);
@@ -33,6 +33,8 @@ export default function Choice() {
         await generateQuestion(nowePytania);
         
       }else{
+        const nowePytania = [...starePytania, pytanie];
+        setStarePytania(nowePytania);
         setEtap(prev => prev + 1);
       }
     
@@ -89,7 +91,7 @@ export default function Choice() {
       );
     case 5:
       return(
-        <Review />
+        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} />
       );
   }
 

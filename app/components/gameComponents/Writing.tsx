@@ -25,10 +25,12 @@ export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowi
           </div>
           <div className="w-full h-1/6 flex justify-end items-center">
             <button onClick={
-              ()=>{setTerazPytanie(prev => prev + 1), 
-                onNext('generujBez67'),
-                setOdpowiedzi([...odpowiedzi, localOdpowiedz]),
+              async ()=>{
+                setOdpowiedzi([...odpowiedzi, localOdpowiedz]), 
+                setTerazPytanie(prev => prev + 1),
+                await onNext('generujBez67'),
                 setLocalOdpowiedz("");
+
               }} 
               className="bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 cursor-pointer">Dalej</button>
           </div>
