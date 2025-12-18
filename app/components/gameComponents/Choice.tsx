@@ -8,7 +8,7 @@ import Review from "./Review";
 export default function Choice() {
 
 
-  const [etap, setEtap] = useState(5);
+  const [etap, setEtap] = useState(1);
   const [userPrzedmiot, setUserPrzedmiot] = useState("");
   const [userTemat, setUserTemat] = useState("");
   const [userIloscPytan, setUserIloscPytan] = useState(1);
@@ -24,12 +24,13 @@ export default function Choice() {
         await generateQuestion(nowePytania);
         setEtap(prev => prev + 1);
       }else if(a === 'generujBez67'){
+         const nowePytania = [...starePytania, pytanie];
+        setStarePytania(nowePytania);
         if(starePytania.length >= userIloscPytan){
           setEtap(prev => prev + 1);
           return;
         }
-        const nowePytania = [...starePytania, pytanie];
-        setStarePytania(nowePytania);
+       
         await generateQuestion(nowePytania);
         
       }else{
@@ -89,7 +90,7 @@ export default function Choice() {
       );
     case 5:
       return(
-        <Review />
+        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} />
       );
   }
 
