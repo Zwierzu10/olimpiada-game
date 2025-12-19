@@ -24,17 +24,16 @@ export default function Choice() {
         await generateQuestion(nowePytania);
         setEtap(prev => prev + 1);
       }else if(a === 'generujBez67'){
+         const nowePytania = [...starePytania, pytanie];
+        setStarePytania(nowePytania);
         if(starePytania.length >= userIloscPytan){
           setEtap(prev => prev + 1);
           return;
         }
-        const nowePytania = [...starePytania, pytanie];
-        setStarePytania(nowePytania);
+       
         await generateQuestion(nowePytania);
         
       }else{
-        const nowePytania = [...starePytania, pytanie];
-        setStarePytania(nowePytania);
         setEtap(prev => prev + 1);
       }
     
@@ -91,7 +90,7 @@ export default function Choice() {
       );
     case 5:
       return(
-        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} />
+        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} onNext={nextEtap} />
       );
   }
 
