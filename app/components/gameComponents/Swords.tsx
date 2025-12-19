@@ -29,12 +29,12 @@ function SaberModel() {
 
 type SwordsProps = {
   onNext: (a:string) => void;
-  userPrzedmiot: string;
   setUserPrzedmiot: (przedmiot: string) => void;
+  setTypBroni: (typ: string) => void;
 };
 
 
-export default function Swords({ onNext, userPrzedmiot, setUserPrzedmiot }: SwordsProps) {
+export default function Swords({ onNext, setUserPrzedmiot, setTypBroni }: SwordsProps) {
  return (
     <div className="w-full h-screen flex justify-center items-center bg-[#1D1E22]">
       <div className="relative w-4/5 h-4/5">
@@ -50,13 +50,13 @@ export default function Swords({ onNext, userPrzedmiot, setUserPrzedmiot }: Swor
           <h2 className="w-full h-[15%] text-xl text-gray-300 flex items-start justify-center">Jakiego przedmiotu chcesz się pouczyć?</h2>
 
           <div className="w-full h-3/4 flex justify-around items-center">
-            <div onClick={() => { setUserPrzedmiot("Informatyka"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
-                <Canvas camera={{ position: [0, 100, 0], fov: 10000 }}>
+            <div onClick={() => { setUserPrzedmiot("Informatyka"); onNext("67"); setTypBroni("sword"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+                <Canvas camera={{ position: [0, 4, 0], fov: 45 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
 
                     <SwordModel />
-                    <OrbitControls autoRotate />
+                    <OrbitControls/>
                     </Canvas> 
 
                     <div className="rounded-2xl absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
@@ -64,52 +64,52 @@ export default function Swords({ onNext, userPrzedmiot, setUserPrzedmiot }: Swor
                         <p className="text-gray-400 text-lg font-semibold text-center">Miecz</p>
                     </div>
             </div>
-            <div onClick={() => { setUserPrzedmiot("Historia"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
-                <Canvas camera={{ position: [0, 2, 0], fov: 10000 }}>
+            <div onClick={() => { setUserPrzedmiot("Historia"); onNext("67"); setTypBroni("katana"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+                <Canvas camera={{ position: [0, 5, 0], fov: 45 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
 
                     <KatanaModel />
-                    <OrbitControls  autoRotate/>
+                    <OrbitControls />
                     </Canvas>
                        <div className="rounded-2xl absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                         <p className="text-white text-xl font-semibold text-center">Historia</p>
                         <p className="text-gray-400 text-lg font-semibold text-center">Katana</p>
                     </div>
             </div>
-            <div onClick={() => { setUserPrzedmiot("Biologia"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
-                <Canvas camera={{ position: [10, 1, 10], fov: 10000 }}>
+            <div onClick={() => { setUserPrzedmiot("Biologia"); onNext("67"); setTypBroni("dagger"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+                <Canvas camera={{ position: [0, 8, 0], fov: 45 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
 
                     <DaggerModel />
-                    <OrbitControls autoRotate />
+                    <OrbitControls  />
                     </Canvas>
                        <div className="rounded-2xl absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                         <p className="text-white text-xl font-semibold text-center">Biologia</p>
                         <p className="text-gray-400 text-lg font-semibold text-center">Sztylet</p>
                     </div>
             </div>
-            <div onClick={() => { setUserPrzedmiot("Chemia"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
-                <Canvas camera={{ position: [1, 500, 1], fov: 10000 }}>
+            <div onClick={() => { setUserPrzedmiot("Chemia"); onNext("67"); setTypBroni("great_sword"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+                <Canvas camera={{ position: [0, 9, 0], fov: 45 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
 
                     <GreatSwordModel />
-                    <OrbitControls autoRotate />
+                    <OrbitControls  />
                     </Canvas>
                        <div className="rounded-2xl absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                         <p className="text-white text-xl font-semibold text-center">Chemia</p>
                         <p className="text-gray-400 text-lg font-semibold text-center">Duży Miecz</p>
                     </div>
             </div>
-            <div onClick={() => { setUserPrzedmiot("Geografia"); onNext("67"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
-                <Canvas camera={{ position: [10, 167, 10], fov: 10000 }}>
+            <div onClick={() => { setUserPrzedmiot("Geografia"); onNext("67"); setTypBroni("saber"); }} className="bg-[#2e2f35] relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:">
+                <Canvas camera={{ position: [0, 5, 0], fov: 45 }}>
                     <ambientLight intensity={5} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
 
                     <SaberModel />
-                    <OrbitControls autoRotate />
+                    <OrbitControls  />
                     </Canvas>
                        <div className="rounded-2xl absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                         <p className="text-white text-xl font-semibold text-center">Geografia</p>

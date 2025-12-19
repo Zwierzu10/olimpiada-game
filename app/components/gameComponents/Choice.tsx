@@ -4,6 +4,7 @@ import InputAi from "./InputAi";
 import Options from "./Options";
 import Writing from "./Writing";
 import Review from "./Review";
+import Score from "./Score";
 
 export default function Choice() {
 
@@ -16,6 +17,8 @@ export default function Choice() {
   const [pytanie, setPytanie] = useState("");
   const [starePytania, setStarePytania] = useState<string[]>([]);
   const [odpowiedzi, setOdpowiedzi] = useState<string[]>([]);
+  const [wyniki, setWyniki] = useState<number[]>([]);
+  const [typBroni, setTypBroni] = useState("");
 
     const nextEtap = async(a:string) => {
       if(a === 'generuj'){
@@ -72,7 +75,7 @@ export default function Choice() {
 
     case 1:
       return (
-        <Swords onNext={nextEtap} userPrzedmiot={userPrzedmiot} setUserPrzedmiot={setUserPrzedmiot} />
+        <Swords onNext={nextEtap} setUserPrzedmiot={setUserPrzedmiot} setTypBroni={setTypBroni} />
       );
 
   case 2:
@@ -90,8 +93,13 @@ export default function Choice() {
       );
     case 5:
       return(
-        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} onNext={nextEtap} />
+        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} onNext={nextEtap} userTrudnosc={userTrudnosc} wyniki={wyniki} setWyniki={setWyniki} />
       );
+    case 6:
+      return(
+        <Score wyniki={wyniki} typBroni={typBroni} />
+      );
+      
   }
 
  

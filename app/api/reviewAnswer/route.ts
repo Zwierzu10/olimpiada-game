@@ -3,7 +3,7 @@ import OpenAI from "openai";
 
 export async function POST(request: Request) {
   try {
-    const { pytanie, odpowiedz } = await request.json();
+    const { pytanie, odpowiedz, trudnosc } = await request.json();
 
     const client = new OpenAI({
       apiKey: process.env.OPENROUTER_API_KEY,
@@ -12,6 +12,11 @@ export async function POST(request: Request) {
 
     const prompt = `Przeanalizuj odpowiedz ucznia na pytanie: "${pytanie}". Podziel odpowiedz na trzy kategorie: "dobrze", "srednio" i "zle".
     Odpowiedz ucznia: "${odpowiedz}".
+
+    Dla całej wypowiedzi daj określoną ilość punktów w skali 0-100, gdzie 100 to odpowiedz idealna, a 0 to brak odpowiedzi lub całkowicie błędna odpowiedz.
+    Punkty powinna opierać się na podstawię ciężkości wybranej przez gracza ${trudnosc}, czyli jak ciężkość jest łatwa to dajesz więcej punktów i z przymróżeniem oka sprawdzasz tą prace,
+    ale jak cięzkość jest trudniejsza to bądź bardziej surowy w ocenie.
+
     Dla każdego zdania zwróć:
     tekst: dokładne zdanie
     wynik: "dobrze" | "srednio" | "zle"
@@ -29,9 +34,10 @@ export async function POST(request: Request) {
           {
             "tekst": "zdanie",
             "wynik": "dobrze" | "srednio" | "zle",
-            "wytlumaczenie": "wyjaśnienie"
+            "wytlumaczenie": "wyjaśnienie",
           }
-        ]
+        ],
+        "punkty": "ilosc punktów za to zadanie w skali 0-100"
       }
       `;
 
