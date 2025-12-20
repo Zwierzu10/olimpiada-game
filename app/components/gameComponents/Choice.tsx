@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swords from "./Swords";
 import InputAi from "./InputAi";
 import Options from "./Options";
@@ -7,6 +7,7 @@ import Review from "./Review";
 import Score from "./Score";
 
 export default function Choice() {
+
 
 
   const [etap, setEtap] = useState(1);
@@ -19,6 +20,9 @@ export default function Choice() {
   const [odpowiedzi, setOdpowiedzi] = useState<string[]>([]);
   const [wyniki, setWyniki] = useState<number[]>([]);
   const [typBroni, setTypBroni] = useState("");
+  const [nazwaBroni, setNazwaBroni] = useState("");
+
+ 
 
     const nextEtap = async(a:string) => {
       if(a === 'generuj'){
@@ -61,12 +65,12 @@ export default function Choice() {
         throw new Error('Blad API');
       }
 
+      setTypBroni(userPrzedmiot);
       const data = await response.json();
       setPytanie(data.question);
   }catch(error){
     alert('Wystapil blad podczas generowania pytania. Sprobuj ponownie.');
   }
-
 
 
   };
@@ -93,11 +97,12 @@ export default function Choice() {
       );
     case 5:
       return(
-        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} onNext={nextEtap} userTrudnosc={userTrudnosc} wyniki={wyniki} setWyniki={setWyniki} />
+        <Review starePytania={starePytania} odpowiedzi={odpowiedzi} onNext={nextEtap} userTrudnosc={userTrudnosc} wyniki={wyniki} setWyniki={setWyniki}
+         typBroni={typBroni} setNazwaBroni={setNazwaBroni} />
       );
     case 6:
       return(
-        <Score wyniki={wyniki} typBroni={typBroni} />
+        <Score wyniki={wyniki} typBroni={typBroni} nazwaBroni={nazwaBroni} setNazwaBroni={setNazwaBroni} setTypBroni={setTypBroni} userTrudnosc={userTrudnosc} />
       );
       
   }

@@ -11,10 +11,12 @@ type ZanalizowanaOdpowiedz = {
 type ReviewResponse = {
   analiza: ZanalizowanaOdpowiedz[];
   punkty: number;
+  nazwaBroni: string;
 }
 
-export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, wyniki, setWyniki}: 
-  {starePytania:string[], odpowiedzi:string[], onNext: (a:string) => void, userTrudnosc: string, wyniki: number[], setWyniki: React.Dispatch<React.SetStateAction<number[]>>}) {
+export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, wyniki, setWyniki, typBroni, setNazwaBroni}: 
+  {starePytania:string[], odpowiedzi:string[], onNext: (a:string) => void, userTrudnosc: string, wyniki: number[], setWyniki: React.Dispatch<React.SetStateAction<number[]>>, 
+    typBroni: string, setNazwaBroni: React.Dispatch<React.SetStateAction<string>>}) {
 
   const [pytanieTeraz, setPytanieTeraz] = useState(1);
   const [analiza, setAnaliza] = useState<ZanalizowanaOdpowiedz[]>([]);
@@ -29,13 +31,14 @@ export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, 
           pytanie: starePytania[pytanieTeraz],
           odpowiedz : odpowiedzi[pytanieTeraz - 1],
           trudnosc: userTrudnosc,
+          typBroni: typBroni
         }),
       });
 
 
       const data: ReviewResponse = await response.json();
       setAnaliza(data.analiza)
-
+      setNazwaBroni(data.nazwaBroni);
       setWyniki(prev=>{
         const newWyniki = [...prev];
         newWyniki[pytanieTeraz - 1] = data.punkty;
@@ -55,10 +58,10 @@ export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, 
 
         <div className="z-10 relative w-full h-full flex flex-col justify-center items-between p-4">
           <div className="w-full h-[10%] flex justify-between items-center mb-4">
-            <h1 className="text-white text-2xl mb-4 w-[90%] h-full">
+            <h1 className="text-white text-2xl mb-4 w-[90%] h-full flex justify-center items-center">
               {starePytania[pytanieTeraz]}
             </h1>
-            <h1 className="text-white text-2xl mb-4 w-[10%] h-full">
+            <h1 className="text-white text-2xl mb-4 w-[10%] h-full flex justify-end items-start">
               {pytanieTeraz}/{starePytania.length-1}
             </h1>
           </div>
@@ -79,10 +82,10 @@ export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, 
               ))}
             </div>
 
-            <div className="w-1/3 h-full bg-[#2e2f35] rounded-2xl p-4 overflow-y-auto">
-              <h1 className="w-full flex justify-center text-white">Wynik: {wyniki[pytanieTeraz - 1]}%</h1>
+            <div className="w-1/3 h-full bg-[#2e2f35] rounded-2xl p-4 overflow-y-auto flex flex-col justify-start items-center">
+              <h1 className="w-1/2 flex justify-center text-white p-4 bg-[#28292e] rounded-2xl">Wynik: {wyniki[pytanieTeraz - 1]}%</h1>
               {analiza.map((item, index) => (
-                <div key={index} className="mb-4">
+                <div key={index} className="mt-4">
                   <p className="text-white font-bold underline">{item.tekst}</p>
                   <p className="text-gray-300 text-sm">{item.wytlumaczenie}</p>
                 </div>
