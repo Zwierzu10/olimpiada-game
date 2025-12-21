@@ -48,12 +48,12 @@ export async function POST(request: Request) {
       `;
 
     const response = await client.chat.completions.create({
-      model: "openai/gpt-4o", 
+      model: "meta-llama/llama-3.3-70b-instruct:free", 
       messages: [
         { role: "system", content: "Jesteś nauczycielem, który analizuje odpowiedzi ucznia i tłumaczy błędy." },
         { role: "user", content: prompt },
       ],
-      max_tokens: 200,
+      max_tokens: 500,
     });
 
     const content = response.choices?.[0]?.message?.content;

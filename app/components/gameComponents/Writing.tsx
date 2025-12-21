@@ -1,6 +1,6 @@
 import { useState } from "react";
-export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowiedzi, onNext }: 
-  { userIloscPytan: number, pytanie: string, odpowiedzi: string[], setOdpowiedzi: (odpowiedzi: string[]) => void, onNext: (a: string) => Promise<void> }) {
+export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowiedzi, onNext, loading }: 
+  { userIloscPytan: number, pytanie: string, odpowiedzi: string[], setOdpowiedzi: (odpowiedzi: string[]) => void, onNext: (a: string) => Promise<void>, loading: boolean }) {
 
   const [terazPytanie, setTerazPytanie] = useState(1);
   const [localOdpowiedz, setLocalOdpowiedz] = useState("");
@@ -24,15 +24,24 @@ export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowi
             <textarea onChange={(e)=>setLocalOdpowiedz(e.target.value)} value={localOdpowiedz} className=" w-full h-9/10 bg-[#2e2f35] rounded-3xl p-4"/>
           </div>
           <div className="w-full h-1/6 flex justify-end items-center">
-            <button onClick={
+            <button 
+            disabled={loading}
+            onClick={
               async ()=>{
+                if(loading) return;
+                if(localOdpowiedz.trim() === ""){
+                  alert("Musisz wpisać odpowiedź aby przejść dalej.");
+                  return;
+                }
                 setOdpowiedzi([...odpowiedzi, localOdpowiedz]), 
                 setTerazPytanie(prev => prev + 1),
                 await onNext('generujBez67'),
                 setLocalOdpowiedz("");
 
               }} 
-              className="bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 cursor-pointer">Dalej</button>
+              className="bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 cursor-pointer">
+                {loading ? "Generowanie pytania..." : "Dalej"}
+              </button>
           </div>
         </div>
       </div>

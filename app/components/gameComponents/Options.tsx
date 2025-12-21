@@ -23,8 +23,9 @@ function EarthRune() {
 
 
 
-export default function Options({ userIloscPytan, setUserIloscPytan, userTrudnosc, setUserTrudnosc, onNext }:
-   { onNext: (a: string) => Promise<void>, userIloscPytan: number; setUserIloscPytan: (ilosc: number) => void; userTrudnosc: string; setUserTrudnosc: (trudnosc: string) => void; }) {
+export default function Options({ userIloscPytan, setUserIloscPytan, userTrudnosc, setUserTrudnosc, onNext, loading, setLoading }:
+   { onNext: (a: string) => Promise<void>, userIloscPytan: number; setUserIloscPytan: (ilosc: number) => void; userTrudnosc: string; 
+    setUserTrudnosc: (trudnosc: string) => void; loading: boolean; setLoading: (loading: boolean) => void }) {
 
 
 
@@ -130,14 +131,16 @@ export default function Options({ userIloscPytan, setUserIloscPytan, userTrudnos
               setUserIloscPytan(value);
             }}
               className="bg-[#2e2f35] w-1/10 h-1/6 p-4  rounded-2xl hover:scale-105 transition-transform duration-300" />
-            <button onClick={async()=>{
+            <button 
+            disabled={loading}
+            onClick={async()=>{
               if(selectedRune === ""){
                 errorSetNormal("Wybierz runę przed potwierdzeniem!");
                 return;
               }
               await onNext('generuj');
             }} className={`w-1/3 rounded-4xl text-white border-2 border-[#2e2f35] cursor-pointer transition-transform duration-300 bg-[#1D1E22]
-             p-4 ${errorText ? "ring-4 ring-red-500  hover:scale-100" : "ring-4 ring-transparent hover:scale-105"}`}>{errorText || "Potwierdź wybór runy"}</button>
+             p-4 ${errorText ? "ring-4 ring-red-500  hover:scale-100" : "ring-4 ring-transparent hover:scale-105"}`}>{loading ? "Generowanie Pytań..." : errorText || "Potwierdź wybór runy"}</button>
           </div>
         </div>
       </div>

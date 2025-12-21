@@ -21,8 +21,9 @@ export default function Choice() {
   const [wyniki, setWyniki] = useState<number[]>([]);
   const [typBroni, setTypBroni] = useState("");
   const [nazwaBroni, setNazwaBroni] = useState("");
+  
+  const [loading, setLoading] = useState(false);
 
- 
 
     const nextEtap = async(a:string) => {
       if(a === 'generuj'){
@@ -48,6 +49,7 @@ export default function Choice() {
 
   const generateQuestion = async (poprzednie:string[]) => {
     try {
+      setLoading(true);
       const response = await fetch('/api/generateQuestions', {
         method: 'POST',
         headers: {
@@ -58,7 +60,7 @@ export default function Choice() {
           temat: userTemat,
           iloscPytan: userIloscPytan,
           trudnosc: userTrudnosc,
-          poprzedniePytania: starePytania,
+          poprzedniePytania: poprzednie,
         }),
       });
       if (!response.ok){
@@ -68,8 +70,12 @@ export default function Choice() {
       setTypBroni(userPrzedmiot);
       const data = await response.json();
       setPytanie(data.question);
+
+      await new Promise(res => setTimeout(res, 1000));
   }catch(error){
     alert('Wystapil blad podczas generowania pytania. Sprobuj ponownie.');
+  }finally{
+    setLoading(false);
   }
 
 
@@ -88,12 +94,13 @@ export default function Choice() {
     );
     case 3:
       return(
-      <Options userIloscPytan={userIloscPytan} setUserIloscPytan={setUserIloscPytan} userTrudnosc={userTrudnosc} setUserTrudnosc={setUserTrudnosc} onNext={nextEtap} />
+      <Options userIloscPytan={userIloscPytan} setUserIloscPytan={setUserIloscPytan} userTrudnosc={userTrudnosc} setUserTrudnosc={setUserTrudnosc} 
+      onNext={nextEtap} loading={loading} setLoading={setLoading} />
       );
 
     case 4:
       return(
-        <Writing userIloscPytan={userIloscPytan} pytanie={pytanie} odpowiedzi={odpowiedzi} setOdpowiedzi={setOdpowiedzi}  onNext={nextEtap} />
+        <Writing userIloscPytan={userIloscPytan} pytanie={pytanie} odpowiedzi={odpowiedzi} setOdpowiedzi={setOdpowiedzi}  onNext={nextEtap} loading={loading} />
       );
     case 5:
       return(
