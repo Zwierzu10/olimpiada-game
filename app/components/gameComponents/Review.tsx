@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import ReviewLoading from "../ReviewLoading";
 
 
 type ZanalizowanaOdpowiedz = {
@@ -20,11 +21,34 @@ export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, 
 
   const [pytanieTeraz, setPytanieTeraz] = useState(1);
   const [analiza, setAnaliza] = useState<ZanalizowanaOdpowiedz[]>([]);
-  
+  const [loading, setLoading] = useState(false);
+
+
+
+  const fetchWithRetry = async (url: string, options: RequestInit, retries = 3, delay = 1000): Promise<Response> => {
+      try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response;
+      } catch (error) {
+        if(retries <= 1){
+          throw error;
+        }
+
+        await new Promise(res => setTimeout(res, delay));
+        return fetchWithRetry(url, options, retries - 1, delay);
+      }
+    };
+
+
 
   useEffect(()=>{
     const fetchReview = async () => {
-      const response = await fetch('/api/reviewAnswer', {
+      try{
+      setLoading(true);
+      const response = await fetchWithRetry('/api/reviewAnswer', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -34,6 +58,7 @@ export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, 
           typBroni: typBroni
         }),
       });
+    
 
 
       const data: ReviewResponse = await response.json();
@@ -44,6 +69,11 @@ export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, 
         newWyniki[pytanieTeraz - 1] = data.punkty;
         return newWyniki;
       })
+      }catch (error) {
+        console.error("Error przy sprawdzaniu odpowiedzi:", error);
+      }finally{
+        setLoading(false);
+    }
     };
     fetchReview();
   },[starePytania, odpowiedzi, pytanieTeraz]);
@@ -57,8 +87,15 @@ export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, 
         <div className="animated-border-box absolute inset-0 rounded-xl flex justify-around items-center flex-col "></div>
 
         <div className="z-10 relative w-full h-full flex flex-col justify-center items-between p-4">
+
+        {loading ? (
+          <ReviewLoading/>
+        ) : (
+          
+        
+          <>
           <div className="w-full h-[10%] flex justify-between items-center mb-4">
-            <h1 className="text-white text-2xl mb-4 w-[90%] h-full flex justify-center items-center">
+            <h1 className="text-white text-2xl mb-4 w-[90%] h-full flex justify-center items-center mt-6 p-4">
               {starePytania[pytanieTeraz]}
             </h1>
             <h1 className="text-white text-2xl mb-4 w-[10%] h-full flex justify-end items-start">
@@ -109,6 +146,8 @@ export default function Review({starePytania, odpowiedzi, onNext, userTrudnosc, 
               Dalej
             </button>
           </div>
+          </>
+          )}
         </div>
       </div>
     </div>

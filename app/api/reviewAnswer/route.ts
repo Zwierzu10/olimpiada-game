@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     srednio - częściowo poprawne, ale niepełne
     zle - błędne lub nie na temat
 
-    ZWRÓĆ TYLKO POPRAWNY JSON w formacie:
+    ZWRÓĆ TYLKO POPRAWNY JSON w formacie BEZ ZADNYCH INNYCH ZBEDNYCH RZECZY TYLKO TO:
 
       {
         "analiza": [

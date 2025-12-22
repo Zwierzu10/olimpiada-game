@@ -140,7 +140,7 @@ export default function Options({ userIloscPytan, setUserIloscPytan, userTrudnos
               }
               await onNext('generuj');
             }} className={`w-1/3 rounded-4xl text-white border-2 border-[#2e2f35] cursor-pointer transition-transform duration-300 bg-[#1D1E22]
-             p-4 ${errorText ? "ring-4 ring-red-500  hover:scale-100" : "ring-4 ring-transparent hover:scale-105"}`}>{loading ? "Generowanie Pytań..." : errorText || "Potwierdź wybór runy"}</button>
+             p-4 ${errorText ? "ring-4 ring-red-500  hover:scale-100" : "ring-4 ring-transparent hover:scale-105"}`}>{loading ? "Generowanie Pytania ..." : errorText || "Potwierdź wybór runy"}</button>
           </div>
         </div>
       </div>

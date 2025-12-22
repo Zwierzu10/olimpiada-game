@@ -74,18 +74,26 @@ export default function Score({wyniki, typBroni, nazwaBroni, setNazwaBroni, setT
                             <OrbitControls  />
                         </Canvas> 
                         </div>
-                        <div className="w-1/3 h-[90%] bg-[#2e2f35] rounded-2xl p-4 flex flex-col justify-start items-center">
+                        <div className="w-1/3 h-[90%] bg-[#2e2f35] rounded-2xl p-4 flex flex-col justify-between items-center">
                            
-                            <h2 className="text-white text-2xl mt-4 w-full flex justify-center items-center">Statystyki broni:</h2>
-                            <ul className="text-gray-300 mt-4 list-disc list-inside w-full flex justify-center items-center flex-col gap-y-2">
-                                <li className="w-[80%] flex justify-start">Typ broni: {typBroni}</li>
-                                <li className="w-[80%] flex items-center gap-x-2">
-                                    <span className="w-[40%]">Nazwa broni:</span>
-                                    <input className="w-[60%] h-full bg-[#2b2c30] text-white rounded-md px-2" type="text" value={nazwaBroni} onChange={(e)=>setNazwaBroni(e.target.value)}/>
-                                </li>
-                                <li className="w-[80%] flex justify-start items-center">Średni wynik użytkownika: {srednia}%</li>
-                                <li className="w-[80%] flex justify-start items-center">Dodana runa: Runa {runa}</li>
-                            </ul>
+                           <div className="w-full h-[80%]">
+                                <h2 className="text-white text-2xl mt-4 w-full flex justify-center items-center">Statystyki broni:</h2>
+                                <ul className="text-gray-300 mt-4 list-disc list-inside w-full flex justify-center items-center flex-col gap-y-2">
+                                    <li className="w-[80%] flex justify-start">Typ broni: {typBroni}</li>
+                                    <li className="w-[80%] flex items-center gap-x-2">
+                                        <span className="w-[40%]">Nazwa broni:</span>
+                                        <input className="w-[60%] h-full bg-[#2b2c30] text-white rounded-md px-2" type="text" value={nazwaBroni} onChange={(e)=>setNazwaBroni(e.target.value)}/>
+                                    </li>
+                                    <li className="w-[80%] flex justify-start items-center">Średni wynik użytkownika: {srednia}%</li>
+                                    <li className="w-[80%] flex justify-start items-center">Dodana runa: Runa {runa}</li>
+                                </ul>
+                           </div>
+
+
+                            <div className="w-full h-[20%] flex justify-around items-center">
+                                <button className="w-1/3 h-1/2 bg-[#4a4a4a] rounded-2xl cursor-pointer text-white ring-4 ring-red-500 hover:scale-105 transition duration-300">Zniszcz miecz</button>
+                                <button className="w-1/3 h-1/2 bg-[#4a4a4a] rounded-2xl cursor-pointer text-white ring-4 ring-green-500 hover:scale-105 transition duration-300">Zachowaj miecz</button>
+                            </div>
                         </div>
                     </div>
                 </div>

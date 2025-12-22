@@ -17,7 +17,7 @@ export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowi
         <div className=" relative w-full h-full flex flex-col justify-between items-center z-10 p-4">
           <div className="w-full h-1/6 flex justify-around items-center flex-row">
           <div className="w-3/10"></div>
-            <h1 className="w-9/10 h-full text-2xl text-white bg-[#1d1e2286] p-4 rounded-3xl">{pytanie}</h1>
+            <h1 className="w-9/10 h-full text-2xl text-white  p-4 rounded-3xl">{pytanie}</h1>
             <h1 className="w-3/10 flex justify-end items-start h-full text-white text-2xl p-4">{terazPytanie}/{userIloscPytan}</h1>
           </div>
           <div className="w-full h-3/6 rounded-3xl p-4 text-white text-xl overflow-y-auto flex justify-center items-center">
@@ -39,8 +39,8 @@ export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowi
                 setLocalOdpowiedz("");
 
               }} 
-              className="bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 cursor-pointer">
-                {loading ? "Generowanie pytania..." : "Dalej"}
+              className={`bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}>
+                {loading ? "Generowanie następnego pytania..." : "Dalej"}
               </button>
           </div>
         </div>
