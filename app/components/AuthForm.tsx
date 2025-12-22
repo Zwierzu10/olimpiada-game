@@ -35,7 +35,11 @@ export default function AuthForm() {
         setTimeout(() => router.push("/"), 1000);
       }
     } catch (error: any) {
-      setMessage("Błąd: " + error.message);
+      if (mode === "login"){
+        setMessage("Złe hasło lub email.")
+      }else{
+        setMessage("Błąd rejestracji");
+      }
     }
 
     setLoading(false);
@@ -87,7 +91,7 @@ export default function AuthForm() {
             : "Utwórz konto"}
         </button>
 
-        {message && <p className={`text-center text-lg ${message.startsWith("Błąd") ? "text-red-500" : "text-green-500"}`}>{message}</p>}
+        {message && <p className={`text-center text-lg ${message === "Zalogowano! Przekierowywanie..." || message === "Konto zostało utworzone" ? "text-green-500" : "text-red-500"}`}>{message}</p>}
 
         <div className="text-center">
           <p className="text-sm text-gray-400">

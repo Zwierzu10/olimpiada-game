@@ -23,6 +23,8 @@ export default function Logout() {
     }
   };
 
+  
+
 
   return (
     <button
@@ -30,19 +32,15 @@ export default function Logout() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="
-        fixed top-5 right-5 z-50 
-        w-14 h-14 flex items-center justify-center 
-        bg-[#131A2A] text-white rounded-full shadow-lg shadow-[#354051]/50 border-[#354051] border-2
-        overflow-hidden 
-        group transition-all duration-300
-        hover:w-48
+        fixed top-5 right-5 z-50
+        flex items-center gap-2
+        bg-[#131A2A] text-white px-4 py-2 rounded-full
+        shadow-lg shadow-[#354051]/50 border-[#354051] border-2
+        hover:bg-[#1E273B] transition-colors duration-300 cursor-pointer
       "
     >
-      <span className="text-xl transition-all duration-50 mr-2">
-        {isHovered ? "" : <FaSignOutAlt />}
-      </span>
-      <span className={` w-full absolute right-4 transition-opacity duration-500 font-semibold cursor-pointer ${isHovered ? "opacity-100" : "opacity-0"}`}>
-        Wyloguj
+      <span className="text-xl transition-all duration-50">
+        Wyloguj się
       </span>
     </button>
   );

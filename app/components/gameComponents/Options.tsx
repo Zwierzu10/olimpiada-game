@@ -61,7 +61,7 @@ export default function Options({ userIloscPytan, setUserIloscPytan, userTrudnos
           <div className="w-full h-1/2 flex justify-around items-center">
             <div onClick={() => { setUserTrudnosc("Łatwy"), setSelectedRune("Fire") }} className={`bg-[#2e2f35] ${selectedRune === "Fire" ? "ring-4 ring-red-500" : "ring-4 ring-transparent"} 
             relative group rounded-2xl h-[80%] w-1/6 flex flex-col justify-center items-center cursor-pointer p-4 hover:scale-105 transition-transform duration-300 hover:`}>
-              <Canvas camera={{ position: [0, 15, 0], fov: 40 }}>
+              <Canvas camera={{ position: [0, 15, 0], fov: 45 }}>
                 <ambientLight intensity={5} />
                 <directionalLight position={[5, 5, 5]} intensity={1} />
                 <FireRune />
