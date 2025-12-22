@@ -1,4 +1,5 @@
 import { useState } from "react";
+import LoadingPage from "../LoadingPage";
 export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowiedzi, onNext, loading }: 
   { userIloscPytan: number, pytanie: string, odpowiedzi: string[], setOdpowiedzi: (odpowiedzi: string[]) => void, onNext: (a: string) => Promise<void>, loading: boolean }) {
 
@@ -15,6 +16,10 @@ export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowi
         <div className="animated-border-box absolute inset-0 rounded-xl"></div>
         
         <div className=" relative w-full h-full flex flex-col justify-between items-center z-10 p-4">
+          {loading ? (
+            <LoadingPage/>
+          ):(
+            <>
           <div className="w-full h-1/6 flex justify-around items-center flex-row">
           <div className="w-3/10"></div>
             <h1 className="w-9/10 h-full text-2xl text-white  p-4 rounded-3xl">{pytanie}</h1>
@@ -39,10 +44,12 @@ export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowi
                 setLocalOdpowiedz("");
 
               }} 
-              className={`bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}>
-                {loading ? "Generowanie następnego pytania..." : "Dalej"}
+              className={`bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 "cursor-pointer"`}>
+               Dalej
               </button>
           </div>
+            </>
+            )}
         </div>
       </div>
   </div>

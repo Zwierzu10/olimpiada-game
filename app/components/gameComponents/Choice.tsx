@@ -6,11 +6,13 @@ import Writing from "./Writing";
 import Review from "./Review";
 import Score from "./Score";
 
+import { useRouter } from "next/navigation";
+
 export default function Choice() {
 
 
 
-  const [etap, setEtap] = useState(1);
+  const [etap, setEtap] = useState<number>(1);
   const [userPrzedmiot, setUserPrzedmiot] = useState("");
   const [userTemat, setUserTemat] = useState("");
   const [userIloscPytan, setUserIloscPytan] = useState(1);
@@ -23,6 +25,7 @@ export default function Choice() {
   const [nazwaBroni, setNazwaBroni] = useState("");
   
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
 
     const nextEtap = async(a:string) => {
@@ -77,13 +80,24 @@ export default function Choice() {
   }finally{
     setLoading(false);
   }
+};
 
+  const comeBackToMenu = () => {
+      setEtap(1);
+      setUserPrzedmiot("");
+      setUserTemat("");
+      setUserIloscPytan(1);
+      setUserTrudnosc("");
+      setPytanie("");
+      setStarePytania([]);
+      setOdpowiedzi([]);
+      setWyniki([]);
+      setTypBroni("");
+      setNazwaBroni("");
+      setLoading(false);
 
-  const saveWeapon = async () => {
-
-
-   }
-  };
+      router.push("/");
+    }
 
   switch(etap){
 
@@ -94,7 +108,7 @@ export default function Choice() {
 
   case 2:
     return(
-      <InputAi userTemat={userTemat} setUserTemat={setUserTemat} onNext={nextEtap} />
+      <InputAi userTemat={userTemat} setUserTemat={setUserTemat} onNext={nextEtap} userPrzedmiot={userPrzedmiot} setEtap={setEtap} />
     );
     case 3:
       return(
@@ -113,7 +127,8 @@ export default function Choice() {
       );
     case 6:
       return(
-        <Score wyniki={wyniki} typBroni={typBroni} nazwaBroni={nazwaBroni} setNazwaBroni={setNazwaBroni} setTypBroni={setTypBroni} userTrudnosc={userTrudnosc} />
+        <Score wyniki={wyniki} typBroni={typBroni} nazwaBroni={nazwaBroni} setNazwaBroni={setNazwaBroni} setTypBroni={setTypBroni} userTrudnosc={userTrudnosc} 
+        comeBackToMenu={comeBackToMenu} />
       );
       
   }

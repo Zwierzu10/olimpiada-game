@@ -2,6 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useState } from "react";
 
+import LoadingPage from "../LoadingPage";
 
 function FireRune() {
   const { scene } = useGLTF("/models/fire_rune.glb");
@@ -48,6 +49,11 @@ export default function Options({ userIloscPytan, setUserIloscPytan, userTrudnos
         <div className="animated-border-box absolute inset-0 rounded-xl"></div>
 
         <div className="relative z-10 w-full h-full flex flex-col text-white p-6">
+
+          {loading ? (
+            <LoadingPage/>
+          ):(
+            <>
           <div className="w-full h-1/8 flex flex-col justify-center items-center">
             <h1 className="w-full h-3/4 text-4xl flex items-center justify-center">Jakie runy chcesz dodać do broni?</h1>
             <h2 className="text-gray-400 w-full h-1/4 flex items-center justify-center">Jaki poziom trudności chcesz wybrać?</h2>
@@ -142,6 +148,8 @@ export default function Options({ userIloscPytan, setUserIloscPytan, userTrudnos
             }} className={`w-1/3 rounded-4xl text-white border-2 border-[#2e2f35] cursor-pointer transition-transform duration-300 bg-[#1D1E22]
              p-4 ${errorText ? "ring-4 ring-red-500  hover:scale-100" : "ring-4 ring-transparent hover:scale-105"}`}>{loading ? "Generowanie Pytania ..." : errorText || "Potwierdź wybór runy"}</button>
           </div>
+          </>
+          )}
         </div>
       </div>
 
