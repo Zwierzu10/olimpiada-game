@@ -1,8 +1,8 @@
 'use client'
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase"
-
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db, auth} from "../../firebase"
+import { onAuthStateChanged } from "firebase/auth";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useRouter } from "next/navigation";
@@ -84,17 +84,28 @@ export default function Inventory(){
     const router = useRouter();
 
 
-    useEffect(()=>{
-        const fetchWeapons = async () => {
-            const snapshot = await getDocs(collection(db, "weapons"));
-            const data = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            })) as Weapon[];
-            setWeapons(data);
-        }
-        fetchWeapons();
-    },[])
+   useEffect(() => {
+    const unsub = onAuthStateChanged(auth, user => {
+        if (!user) return;
+
+        fetchWeapons(user.uid);
+    });
+
+    return () => unsub();
+    }, []);
+
+    const fetchWeapons = async (uid: string) => {
+    const q = query(
+        collection(db, "weapons"),
+        where("uid", "==", uid)
+    );
+
+    const snapshot = await getDocs(q);
+    setWeapons(snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    })) as Weapon[]);
+    };
 
     const handleBackClick = () => {
         router.push("/");

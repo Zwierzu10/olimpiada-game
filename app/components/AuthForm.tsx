@@ -38,7 +38,13 @@ export default function AuthForm() {
       if (mode === "login"){
         setMessage("Złe hasło lub email.")
       }else{
+        if(error.code === "auth/email-already-in-use"){
+          setMessage("Email jest już używany.");
+        } else if(error.code === "auth/weak-password"){
+          setMessage("Hasło jest za słabe.");
+        } else {
         setMessage("Błąd rejestracji");
+        }
       }
     }
 

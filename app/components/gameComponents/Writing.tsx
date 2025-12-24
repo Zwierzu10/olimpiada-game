@@ -44,7 +44,7 @@ export default function Writing({ userIloscPytan, pytanie, odpowiedzi, setOdpowi
                 setLocalOdpowiedz("");
 
               }} 
-              className={`bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 "cursor-pointer"`}>
+              className={`bg-[#2e2f35] text-white p-4 rounded-3xl hover:scale-105 transition-transform duration-300 cursor-pointer`}>
                Dalej
               </button>
           </div>
